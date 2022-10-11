@@ -12,10 +12,7 @@ def rotateCube(A):
             A[N - 1 - i][N - 1 - j] = A[j][N - 1 - i]
             A[j][N - 1 - i] = temp
 
-
-# magicCube=[[8,1,6],[3,5,7],[4,9,2]]
-# rotateCube(magicCube)
-# print(magicCube)
+## function to reflect matrix along y-axis
 
 def reflectCube(A):
     for i in range(3):
