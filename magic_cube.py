@@ -1,4 +1,3 @@
-import numpy as np
 import copy as cp
 
 # Function to rotate the matrix
