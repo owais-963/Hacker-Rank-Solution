@@ -1,4 +1,5 @@
 import numpy as np
+import copy as cp
 
 # Function to rotate the matrix
 # 90 degree clockwise
@@ -24,15 +25,15 @@ def reflectCube(A):
 def allMagicCube():
     allPoMcs=[]
     magicCube=[[8,1,6],[3,5,7],[4,9,2]]
-    allPoMcs.append(magicCube)
-    rfCube=[[8,1,6],[3,5,7],[4,9,2]]
+    allPoMcs.append(cp.deepcopy(magicCube))
+    rfCube=cp.deepcopy(magicCube)
     reflectCube(rfCube)
-    allPoMcs.append(rfCube)
+    allPoMcs.append(cp.deepcopy(rfCube))
     for i in range(3):
         rotateCube(magicCube)
-        allPoMcs.append(magicCube)
+        allPoMcs.append(cp.deepcopy(magicCube))
         rotateCube(rfCube)
-        allPoMcs.append(rfCube)
+        allPoMcs.append(cp.deepcopy(rfCube))
     
     return allPoMcs
 
@@ -42,15 +43,27 @@ def formingMagicSquare(s):
 
     cost=[]
 
-    s=np.array(s)
 
 
     for i in magicCube:
-        cost.append(np.abs(np.sum(s-np.array(i))))
+        initCost=0
+        for j in range(len(i[0])):
+
+            for k in range(len(i[0])):
+
+                initCost += abs(s[j][k]-i[j][k])
+
+        cost.append(abs(initCost))
+
 
     return min(cost)
 
 
+
+###     ---------------      TEST CASES      ----------------       ###
+
+
 print(formingMagicSquare([[4,9,2],[3,5,7],[8,1,5]]))
 print(formingMagicSquare([[5, 3, 4], [1, 5, 8], [6, 4, 2]]))
+print(formingMagicSquare([[4,8,2],[4,5,7],[6,1,6]]))
 
